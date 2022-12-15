@@ -17,4 +17,9 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "::error file=readme.md,line=1::Missing semicolon"
       - run: exit 1
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: send sms if failed
+        if: failure()
+        run: echo "😭 something"
+      - name: report success
+        if: success()
+        run: echo "🎉 success"
