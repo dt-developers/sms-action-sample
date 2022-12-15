@@ -11,10 +11,10 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - name: Explicitly fail this job
-        run: echo "::error file=readme.md,line=1::Missing semicolon"; exit -1
+        run: exit -1
       - name: send sms if failed
         if: failure()
-        run: echo "😭 something"
+        run: curl https://http.cat/500
       - name: report success
         if: success()
         run: echo "🎉 success"
