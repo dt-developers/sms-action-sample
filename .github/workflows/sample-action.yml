@@ -2,7 +2,7 @@ name: GitHub Actions SMS on Failure Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
