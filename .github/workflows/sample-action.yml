@@ -15,4 +15,5 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
+      - run: echo "::error file=readme.md,line=1::Missing semicolon"
       - run: echo "🍏 This job's status is ${{ job.status }}."
