@@ -8,13 +8,13 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
+        run: ls ${{ github.workspace }}
       - name: Explicitly fail this job
         run: exit -1
       - name: send sms if failed
         if: failure()
-        run: curl https://http.cat/500
+        run: |
+          curl --verbose https://api.telekom.com/service/sms/v1/messages -H "x-api-token: ${{SMS_TOKEN}}" -d "From=${{SMS_FROM}}&To=${{SMS_TO}}&Body=Build%20failed%20on%20${{env.GITHUB_JOB}}"
       - name: report success
         if: success()
         run: echo "🎉 success"
