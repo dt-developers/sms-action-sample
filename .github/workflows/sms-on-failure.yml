@@ -19,7 +19,8 @@ jobs:
             -X 'POST' \
             -H 'Content-Type: application/x-www-form-urlencoded' \
             -H 'X-API-KEY: telekom' \
-            -d "From=${FROM}&To=${TO}&Body=Build%20failed." | jq
+            -d "From=${FROM}&To=${TO}&Body=Build%20failed." | jq > output
+          cat output
       - name: report success
         if: success()
         run: echo "🎉 success, but why?"
