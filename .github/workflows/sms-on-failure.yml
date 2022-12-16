@@ -15,11 +15,12 @@ jobs:
         run: exit -1
       - name: send sms if failed
         if: failure()
-        run: |
-          curl https://api.telekom.com/service/sms/v1/messages \
-            -H "x-api-token: $TOKEN" \
-            -H "Content-Type: application/x-www-form-urlencoded" \
-            -d "From=$FROM&To=$TO&Body=Build%20failed."
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://api.telekom.com/service/sms/v1/messages/'
+          method: 'POST'
+          customHeaders: '{"Content-Type": "application/x-www-form-urlencoded"}'
+          data: "From=$FROM&To=$TO&Body=Build%20failed."
       - name: report success
         if: success()
         run: echo "🎉 success, but why?"
