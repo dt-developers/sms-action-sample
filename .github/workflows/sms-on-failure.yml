@@ -12,7 +12,7 @@ jobs:
       - name: explicitly fail this job
         run: exit -1
       - name: print envvar, to check mind
-        run: echo "$FROM : $TO"
+        run: echo "${FROM} - ${TO}"
       - name: send sms if failed
         if: failure()
         run: |
