@@ -15,10 +15,11 @@ jobs:
         if: failure()
         run: |
           curl 'https://api.telekom.com/service/sms/v1/messages/' \
-          -X 'POST' \
-          -H 'Content-Type: application/x-www-form-urlencoded' \
-          -H 'X-API-KEY: telekom' \
-          -d "From=${FROM}&To=${TO}&Body=Build%20failed." | jq
+            --silent \
+            -X 'POST' \
+            -H 'Content-Type: application/x-www-form-urlencoded' \
+            -H 'X-API-KEY: telekom' \
+            -d "From=${FROM}&To=${TO}&Body=Build%20failed." | jq
       - name: report success
         if: success()
         run: echo "🎉 success, but why?"
