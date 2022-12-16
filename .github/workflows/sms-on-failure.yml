@@ -1,14 +1,10 @@
-name: GitHub Actions SMS on Failure Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions
+name: Send SMS on failure
+run-name: ${{ github.actor }} wants to sent an SMS
 on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v3
-      - name: List files in the repository
-        run: ls ${{ github.workspace }}
       - name: Explicitly fail this job
         run: exit -1
       - name: send sms if failed
