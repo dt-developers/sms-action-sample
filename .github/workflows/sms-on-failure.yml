@@ -13,7 +13,7 @@ jobs:
         run: exit -1
       - name: send sms if failed
         if: failure()
-        uses: fjogeleit/http-request-action@v1
+        uses: fjogeleit/http-request-action@v1.12.0
         with:
           url: 'https://api.telekom.com/service/sms/v1/messages/'
           method: 'POST'
