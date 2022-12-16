@@ -1,6 +1,10 @@
 name: Send SMS on failure
 run-name: ${{ github.actor }} wants to sent an SMS
 on: [push]
+env:
+  TOKEN: ${{ secrets.SMS_TOKEN }}
+  FROM: ${{ secrets.SMS_FROM }}
+  TO: ${{ secrets.SMS_TO }}
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -10,7 +14,7 @@ jobs:
       - name: send sms if failed
         if: failure()
         run: |
-          curl --verbose https://api.telekom.com/service/sms/v1/messages -H "x-api-token: ${{ secrets.SMS_TOKEN }}" -d "From=${{ secrets.SMS_FROM }}&To=${{ secrets.SMS_TO }}&Body=Build%20failed%20on%20${{ env.GITHUB_JOB }}."
+          curl --verbose https://api.telekom.com/service/sms/v1/messages -H "x-api-token: $SMS_TOKEN" -d "From=$FROM&To=$TO&Body=Build%20failed."
       - name: report success
         if: success()
         run: echo "🎉 success"
