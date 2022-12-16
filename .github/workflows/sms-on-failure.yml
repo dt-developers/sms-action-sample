@@ -18,8 +18,8 @@ jobs:
             --silent \
             -X 'POST' \
             -H 'Content-Type: application/x-www-form-urlencoded' \
-            -H 'X-API-KEY: telekom' \
-            -d "From=${FROM}&To=${TO}&Body=Build%20failed."
+            -H "X-API-KEY: ${TOKEN}" \
+            -d "From=Telekom&To=%2B${TO}&Body=Build%20failed."
       - name: report success
         if: success()
         run: echo "🎉 success, but why?"
