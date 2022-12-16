@@ -9,12 +9,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Explicitly fail this job
+      - name: explicitly fail this job
         run: exit -1
+      - name: print envvar, to check mind
+        run: echo "$FROM : $TO"
       - name: send sms if failed
         if: failure()
         run: |
-          curl https://api.telekom.com/service/sms/v1/messages -H "x-api-token: $SMS_TOKEN" -d "From=$FROM&To=$TO&Body=Build%20failed."
+          curl https://api.telekom.com/service/sms/v1/messages \
+            -H "x-api-token: $TOKEN" \
+            -H "Content-Type: application/x-www-form-urlencoded" \
+            -d "From=$FROM&To=$TO&Body=Build%20failed."
       - name: report success
         if: success()
-        run: echo "🎉 success"
+        run: echo "🎉 success, but why?"
