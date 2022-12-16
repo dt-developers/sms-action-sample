@@ -9,10 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: explicitly fail this job
-        run: exit -1
       - name: print envvar, to check mind
         run: echo "${FROM} - ${TO}"
+      - name: explicitly fail this job
+        run: exit -1
       - name: send sms if failed
         if: failure()
         run: |
