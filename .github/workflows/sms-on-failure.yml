@@ -9,8 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: print envvar, to check mind
-        run: echo "${FROM} - ${TO}"
       - name: explicitly fail this job
         run: exit -1
       - name: send sms if failed
@@ -19,8 +17,8 @@ jobs:
         with:
           url: 'https://api.telekom.com/service/sms/v1/messages/'
           method: 'POST'
-          customHeaders: "{'Content-Type': 'application/x-www-form-urlencoded','X-API-KEY':$TOKEN}"
-          data: "From=$FROM&To=$TO&Body=Build%20failed."
+          customHeaders: '{"Content-Type": "application/x-www-form-urlencoded","X-API-KEY":$TOKEN}'
+          data: From=$FROM&To=$TO&Body=Build%20failed.
       - name: report success
         if: success()
         run: echo "🎉 success, but why?"
